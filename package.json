@@ -1,0 +1,15 @@
+{
+  "name": "joystick",
+  "version": "1.0.0",
+  "description": "摇杆游戏",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "Joystick"
+  ],
+  "author": "bubblyface",
+  "license": "ISC"
+}
