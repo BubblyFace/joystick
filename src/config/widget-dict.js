@@ -1,4 +1,4 @@
 module.exports = {
-  'stick_action': require('../widgets/stick_action.js'),
-  'stick_direction': require('../widgets/stick_direction.js')
+  'stick_action': require('../widgets/stick_action/index.js'),
+  'stick_direction': require('../widgets/stick_direction/index.js')
 }

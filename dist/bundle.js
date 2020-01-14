@@ -1,3 +1,9 @@
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+module.exports = {
+  'stick_action': require('../widgets/stick_action/index.js'),
+  'stick_direction': require('../widgets/stick_direction/index.js')
+}
+},{"../widgets/stick_action/index.js":3,"../widgets/stick_direction/index.js":4}],2:[function(require,module,exports){
 let widgetArr = [];
 
 const options = {
@@ -53,3 +59,11 @@ class Joystick {
 }
 
 module.exports = Joystick.Instance ? Joystick.Instance : new Joystick(options);
+
+},{"./config/widget-dict.js":1}],3:[function(require,module,exports){
+module.exports = function () {
+
+}
+},{}],4:[function(require,module,exports){
+arguments[4][3][0].apply(exports,arguments)
+},{"dup":3}]},{},[2]);
