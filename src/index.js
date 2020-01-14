@@ -23,6 +23,7 @@ function canvasInit(options) {
 
   const canvas = document.createElement('canvas');
 
+<<<<<<< HEAD
   canvas.id = 'root-canvas';
   canvas.height = height;
   canvas.width = width;
@@ -32,6 +33,19 @@ function canvasInit(options) {
   const ctx = canvas.getContext('2d');
 
   ctx.fillStyle = background;
+=======
+  widgetInit(options) {
+    const widgetDict = require('./config/widget-dict.js');
+  
+    Object.keys(widgetDict).forEach(widgetName => {
+      let widget = new widgetDict[widgetName](options);
+      widgetArr.push({
+        name: widgetName,
+        widget
+      });
+    });
+  }
+>>>>>>> 38e61436143bbf460eccd3798814cd262118f582
 }
 
 function widgetInit(options) {
