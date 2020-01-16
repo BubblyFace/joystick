@@ -19,7 +19,7 @@ function init(initOptions) {
 }
 
 function canvasInit(options) {
-  let { root, height, width, background = '#000000' } = options;
+  let { root, height, width, background = '#aaaaaa' } = options;
 
   const canvas = document.createElement('canvas');
 
@@ -32,10 +32,13 @@ function canvasInit(options) {
   const ctx = canvas.getContext('2d');
 
   ctx.fillStyle = background;
+  ctx.fillRect(0, 0, width, height);
+
+  window.getContext = () => ctx;
 }
 
 function widgetInit(options) {
-  const widgetDict = import ('./config.js');
+  const widgetDict = require('./config/widget-dict.js');
 
   Object.keys(widgetDict).forEach(widgetName => {
     let widget = new widgetDict[widgetName](options);
@@ -44,4 +47,6 @@ function widgetInit(options) {
       widget
     });
   });
+
+  widgetDict['stick_direction'].draw();
 }

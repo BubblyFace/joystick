@@ -12,58 +12,81 @@ const options = {
   width: window.innerWidth
 };
 
-class Joystick {
-  constructor(options) {
-    this.widgetArr = [];
-    this.Instance = null;
-    this.init(options);
+init(options);
+
+function init(initOptions) {
+  let root = document.getElementById('root');
+  if (!root) {
+    console.error(`Donnot have root element!`)
   }
 
-  init(initOptions) {
-    let root = document.getElementById('root');
-    if(!root) {
-      console.error(`Donnot have root element!`)
-    }
-
-    canvasInit(initOptions);
-    widgetInit(initOptions);
-  }
-
-  canvasInit(options) {
-    let { root, height, width, background = '#000000' } = options;
-    
-    const canvas = document.createElement('canvas');
-  
-    canvas.id = 'root-canvas';
-    canvas.height = height;
-    canvas.width = width;
-  
-    root.appendChild(canvas);
-    
-    const ctx = canvas.getContext('2d');
-    
-    ctx.fillStyle = background;
-  }
-
-  widgetInit(options) {
-    const widgetDict = require('./config/widget-dict.js');
-  
-    Object.keys(widgetDict).forEach(widgetName => {
-      let widget = new widgetDict[widgetName](options);
-      widgetArr.push({
-        name: widgetName,
-        widget
-      });
-    });
-  }
+  canvasInit(initOptions);
+  widgetInit(initOptions);
 }
 
-module.exports = Joystick.Instance ? Joystick.Instance : new Joystick(options);
+function canvasInit(options) {
+  let { root, height, width, background = '#aaaaaa' } = options;
 
+  const canvas = document.createElement('canvas');
+
+  canvas.id = 'root-canvas';
+  canvas.height = height;
+  canvas.width = width;
+
+  root.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = background;
+  ctx.fillRect(0, 0, width, height);
+
+  window.getContext = () => ctx;
+}
+
+function widgetInit(options) {
+  const widgetDict = require('./config/widget-dict.js');
+
+  Object.keys(widgetDict).forEach(widgetName => {
+    let widget = new widgetDict[widgetName](options);
+    widgetArr.push({
+      name: widgetName,
+      widget
+    });
+  });
+
+  widgetDict['stick_direction'].draw();
+}
 },{"./config/widget-dict.js":1}],3:[function(require,module,exports){
 module.exports = function () {
 
 }
 },{}],4:[function(require,module,exports){
-arguments[4][3][0].apply(exports,arguments)
-},{"dup":3}]},{},[2]);
+class StickDirection {
+  constructor(option) {
+
+  }
+
+  initSteps() {
+    let ctx = getContext()
+    let steps = [];
+    
+    steps.push(() => {
+      ctx.arc(100, 100, 50, 0, 2 * Math.PI, true);
+    })
+
+    steps.push(() => {
+      ctx.arc(100, 100, 25, 0, 2 * Math.PI, true);
+    })
+    this._steps = steps;
+  }
+
+  draw () {
+    let steps = this._steps;
+    steps.forEach(step => step());
+    let ctx = getContext();
+    ctx.fill();
+  }
+}
+
+module.exports = StickDirection;
+},{}]},{},[2]);
