@@ -5,12 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify src/index.js -o dist/bundle.js && lessc src/index.less dist/index.css"
+    "build": "node ./build/browserify.config.js"
   },
   "keywords": [
     "game",
     "Joystick"
   ],
   "author": "bubblyface",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.0",
+    "tsify": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.7",
+    "babel-preset-es2015": "^6.24.1"
+  }
 }

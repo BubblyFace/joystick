@@ -1,12 +1,4 @@
-let widgetArr = [];
-
-const options = {
-  root,
-  height: window.innerHeight,
-  width: window.innerWidth
-};
-
-init(options);
+init();
 
 function init(initOptions) {
   let root = document.getElementById('root');
@@ -14,8 +6,16 @@ function init(initOptions) {
     console.error(`Donnot have root element!`)
   }
 
-  canvasInit(initOptions);
-  widgetInit(initOptions);
+  let options = {
+    height: window.innerHeight,
+    width: window.innerWidth,
+    root,
+  };
+  let bubbleConfig = require('./config/bubble_config.js');
+
+  let ctx = canvasInit(options);
+  let brush = brushInit(ctx, options, bubbleConfig);
+
 }
 
 function canvasInit(options) {
@@ -35,18 +35,16 @@ function canvasInit(options) {
   ctx.fillRect(0, 0, width, height);
 
   window.getContext = () => ctx;
+
+  return ctx
 }
 
-function widgetInit(options) {
-  const widgetDict = require('./config/widget-dict.js');
 
-  Object.keys(widgetDict).forEach(widgetName => {
-    let widget = new widgetDict[widgetName](options);
-    widgetArr.push({
-      name: widgetName,
-      widget
-    });
-  });
+function brushInit(ctx, options, bubbleConfig) {
+  let Brush = require('../lib/class_define/brush.js');
+  let brush = new Brush(ctx, bubbleConfig);
 
-  widgetDict['stick_direction'].draw();
+  brush.addAction(bubbleConfig);
+
+  return brush
 }
